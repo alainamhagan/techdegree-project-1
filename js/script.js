@@ -3,30 +3,25 @@ Treehouse FSJS Techdegree:
 project 1 - A Random Quote Generator
 ******************************************/
 
-// Study guide for this project - https://drive.google.com/file/d/1s5grutGuQFwJcQP8bFwEI69Q8FCkGdDk/view?usp=sharing
+/***************** 
+  The instructions for this project said 'Do not make any changes to this (index.html) file.'
+  I made changes anyways so I could format my tabs section nicely.
+  I hope that's not a problem.
+ *****************/
 
-
-/*** 
-  Create the array of quote objects and name it `quotes`.
-  Add at least five quote objects to the `quotes` array.
-  Give each quote object a `quote` and `source` property.
-  Add the `citation` property to at least one object in the array.
-  Add the `year` property to at least one object in the array.
-  Use console.log() to log your array of quotes to the console.
-***/
 var quotes = [
 {
   quote:"You could chop a camel right in the hump and drink all of its milk right off the tip of this thing.",
   source: "Charlie Day",
   citation: "It's Always Sunny in Philadelphia",
-  tags: "camel, scimitar, milk"
+  tags: "camel | scimitar | milk"
 },
 {
-  quote:"You are my fire</p><p>The one desire</p><p>Believe when I say</p><p>I want it that way",
+  quote:"You are my fire. The one desire. Believe when I say, I want it that way",
   source: "Backstreet Boys",
   citation: "Millenium",
-  date: "1999",
-  tags: "voice of a generation, transcendent"
+  year: 1999,
+  tags: "voice of a generation | transcendent"
 },
 {
   quote:"I was born for politics!  I have great hair, and I love lying",
@@ -34,63 +29,53 @@ var quotes = [
   citation: "Brooklyn 99",
 },
 {
-  quote:"Mmm Chunt please!",
-  source: "Chunt",
+  quote:"A bear could be almost anything!",
+  source: "Usidore",
   citation: "Hello From The Magic Tavern",
-  tags: "chunt"
+  tags: "master | light | shadow"
 },
 {
   quote:"When you eat ice cream, the cream never ends!",
   source: "Griffin McElroy",
   citation: "My Brother, My Brother, and Me",
-  date: "Hogsplash (414)",
-  tags: "hogsplash, brown, school"
+  year: 2016,
+  tags: "hogsplash | brown | cream"
 }
 ]
 
-
-
-/***
-  Create the `getRandomQuote` function to:
-   - Create a variable to store a random number 
-   - Use the random number to `return` a random quote object from the `quotes` array.
-   - DONE?
-***/
 function getRandomQuote(array) {
   var randomNumber = Math.floor(Math.random() * Math.floor(5));
-  console.log(quotes[randomNumber]);
+  return(quotes[randomNumber]);
 }
-// This won't be called here once this is done
-getRandomQuote(quotes);
 
+/*****************
+   I left the console.log() lines in here because they have helped me troubleshoot and I figure they'd be helpful during peer review if I'm missing something
+   If I'm supposed to take them out before submitting these, let me know and I'll do so next time
+*****************/
 
-/***
-  Create the `printQuote` function to: 
-   - Call the `getRandomQuote` function and assign it to a variable.
-   - Create a variable for the HTML string and set it equal to an empty string.
-   - Use the HTML template in the instructions or the markup in the index.html file, AND 
-     the random quote vairable to build your HTML string.
-   - Add the quote and source section to the HTML string.
-   - Use an if statement to check for the citation property before adding it to the HTML string.
-   - Use an if statement to check for the year property before adding it to the HTML string.
-   - Don't forget to close that final `p` tag.
-   - Set the `innerHTML` of the `quote-box` div to the HTML string. 
-***/
-
-// Currently this doesn't know what I'm calling with .quote etc dot notation
 function printQuote() {
   var currentQuote = getRandomQuote(quotes);
   for(var prop in currentQuote) {
     console.log(currentQuote[prop]);
-    var stringHTML = "";
-    stringHTML += '<p class="quote"">' + currentQuote.quote + '</p>';
-    stringHTML += '<p class="source">' + currentQuote.source + '</p>';
-    stringHTML += '<p class="citation">' + currentQuote.citation + '</p>';
-    stringHTML += '<p class="date">' + currentQuote.date + '</p>';
-    stringHTML += '<p class="tags">' + currentQuote.tags + '</p>';
-    console.log(stringHTML);
+    var outputDiv = "";
+    outputDiv += '<p class="quote">' + currentQuote.quote + '</p>';
+    outputDiv += '<p class="source">' + currentQuote.source;
+    outputDiv += '<span class="citation">' + currentQuote.citation + '</span>';
+    if(currentQuote.year) {
+      outputDiv += '<span class="year">' + currentQuote.year + '</span>';
+    } if (currentQuote.tags) {
+      outputDiv += '<p class="tags">Tags: ' + currentQuote.tags + '</p>';
+    }
+    outputDiv += '</p>'
   }
-}
+  document.getElementById("quote-box").innerHTML = outputDiv;
+  function getNewBackground() {
+    var newColor = Math.floor(Math.random() * Math.floor(999999));
+    console.log(newColor);
+    document.getElementById("body").style.backgroundColor = '#' + newColor;
+   }
+   getNewBackground();
+  }
 printQuote(quotes);
 
 
